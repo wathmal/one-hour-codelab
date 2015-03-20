@@ -6,22 +6,31 @@ import 'dart:html';
 
 ButtonElement genButton;
 
-void  main() {
-  querySelector('#inputName').onInput.listen(updateBadge);
+main() async {
+  var inputField = querySelector('#inputName');
   genButton = querySelector('#generateButton');
-  genButton.onClick.listen(generateBadge);
+
+  await for (var event in inputField.onInput) {
+    updateBadge(event);
+  }
+
+  await for (var event in genButton.onClick) {
+    generateBadge(event);
+  }
 }
 
 void updateBadge(Event e) {
   String inputName = (e.target as InputElement).value;
-  
+
   setBadgeName(inputName);
   if (inputName.trim().isEmpty) {
-    genButton..disabled = false
-             ..text = 'Aye! Gimme a name!';
+    genButton
+      ..disabled = false
+      ..text = 'Aye! Gimme a name!';
   } else {
-    genButton..disabled = true
-             ..text = 'Arrr! Write yer name!';
+    genButton
+      ..disabled = true
+      ..text = 'Arrr! Write yer name!';
   }
 }
 
