@@ -4,9 +4,12 @@
 
 import 'dart:html';
 
-main() async {
-  //querySelector('#inputName').onInput.listen(updateBadge);
+main() {
   var inputName = querySelector('#inputName');
+  initEventListeners(inputName);
+}
+
+initEventListeners(var inputName) async {
   await for (var event in inputName.onInput) {
     print(event);
     updateBadge(event);

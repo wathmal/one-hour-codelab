@@ -7,10 +7,13 @@ import 'dart:math' show Random;
 
 ButtonElement genButton;
 
-main() async {
+main() {
   var inputField = querySelector('#inputName');
   genButton = querySelector('#generateButton');
+  initEventListeners(inputField);
+}
 
+initEventListeners(var inputField) async {
   await for (var event in inputField.onInput) {
     updateBadge(event);
   }
@@ -56,8 +59,7 @@ class PirateName {
       _firstName = firstName;
     }
     if (appellation == null) {
-      _appellation =
-          appellations[indexGen.nextInt(appellations.length)];
+      _appellation = appellations[indexGen.nextInt(appellations.length)];
     } else {
       _appellation = appellation;
     }

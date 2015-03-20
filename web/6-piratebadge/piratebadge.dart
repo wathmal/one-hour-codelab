@@ -44,6 +44,10 @@ main() async {
     badgeNameElement.text = 'Arrr! No names.';
   }
 
+  initEventListeners(inputField);
+}
+
+initEventListeners(inputField) async {
   await for (var event in inputField.onInput) {
     updateBadge(event);
   }
@@ -105,8 +109,7 @@ class PirateName {
       _firstName = firstName;
     }
     if (appellation == null) {
-      _appellation =
-          appellations[indexGen.nextInt(appellations.length)];
+      _appellation = appellations[indexGen.nextInt(appellations.length)];
     } else {
       _appellation = appellation;
     }
@@ -120,8 +123,7 @@ class PirateName {
 
   String toString() => pirateName;
 
-  String get jsonString =>
-      JSON.encode({"f": _firstName, "a": _appellation});
+  String get jsonString => JSON.encode({"f": _firstName, "a": _appellation});
 
   String get pirateName =>
       _firstName.isEmpty ? '' : '$_firstName the $_appellation';

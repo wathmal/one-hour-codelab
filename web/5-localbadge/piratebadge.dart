@@ -10,10 +10,15 @@ final String TREASURE_KEY = 'pirateName';
 
 ButtonElement genButton;
 
-main() async {
+main() {
   var inputField = querySelector('#inputName');
   genButton = querySelector('#generateButton');
+  initEventListeners(inputField);
 
+  setBadgeName(getBadgeNameFromStorage());
+}
+
+initEventListeners(var inputField) async {
   await for (var event in inputField.onInput) {
     updateBadge(event);
   }
@@ -21,8 +26,6 @@ main() async {
   await for (var event in genButton.onClick) {
     generateBadge(event);
   }
-
-  setBadgeName(getBadgeNameFromStorage());
 }
 
 void updateBadge(Event e) {
@@ -74,8 +77,7 @@ class PirateName {
       _firstName = firstName;
     }
     if (appellation == null) {
-      _appellation =
-          appellations[indexGen.nextInt(appellations.length)];
+      _appellation = appellations[indexGen.nextInt(appellations.length)];
     } else {
       _appellation = appellation;
     }
@@ -89,8 +91,7 @@ class PirateName {
 
   String toString() => pirateName;
 
-  String get jsonString =>
-      '{ "f": "$_firstName", "a": "$_appellation" } ';
+  String get jsonString => '{ "f": "$_firstName", "a": "$_appellation" } ';
 
   String get pirateName =>
       _firstName.isEmpty ? '' : '$_firstName the $_appellation';

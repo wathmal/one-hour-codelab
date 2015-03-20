@@ -6,10 +6,13 @@ import 'dart:html';
 
 ButtonElement genButton;
 
-main() async {
+main() {
   var inputField = querySelector('#inputName');
   genButton = querySelector('#generateButton');
+  initEventListeners(inputField);
+}
 
+initEventListeners(var inputField) async {
   await for (var event in inputField.onInput) {
     updateBadge(event);
   }
